@@ -1,6 +1,6 @@
 app_name = "employee_asset_management"
 app_title = "Employee Asset Management"
-app_publisher = "Antigravity"
+app_publisher = "Somil Vaishya"
 app_description = "Asset Management System"
 app_email = "admin@example.com"
 app_license = "mit"
