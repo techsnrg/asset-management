@@ -1,4 +1,12 @@
 frappe.ui.form.on("Asset Request", {
+    setup(frm) {
+        frm.set_query("requested_for", () => ({
+            filters: {
+                status: "Active"
+            }
+        }));
+    },
+
     onload(frm) {
         if (frm.is_new() && !frm.doc.requested_by) {
             frm.set_value("requested_by", frappe.session.user);
