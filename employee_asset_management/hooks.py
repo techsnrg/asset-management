@@ -13,11 +13,16 @@ scheduler_events = {
     ]
 }
 
+doctype_js = {
+    "Delivery Note": "public/js/delivery_note.js",
+}
+
 permission_query_conditions = {
     "Asset Request": "employee_asset_management.employee_asset_management.permissions.asset_request_query",
     "Asset Assignment": "employee_asset_management.employee_asset_management.permissions.asset_assignment_query",
     "Asset Return": "employee_asset_management.employee_asset_management.permissions.asset_return_query",
     "Company Asset": "employee_asset_management.employee_asset_management.permissions.company_asset_query",
+    "Employee Sample Issue": "employee_asset_management.employee_asset_management.permissions.employee_sample_issue_query",
 }
 
 has_permission = {
@@ -25,6 +30,7 @@ has_permission = {
     "Asset Assignment": "employee_asset_management.employee_asset_management.permissions.asset_assignment_has_permission",
     "Asset Return": "employee_asset_management.employee_asset_management.permissions.asset_return_has_permission",
     "Company Asset": "employee_asset_management.employee_asset_management.permissions.company_asset_has_permission",
+    "Employee Sample Issue": "employee_asset_management.employee_asset_management.permissions.employee_sample_issue_has_permission",
 }
 
 fixtures = [

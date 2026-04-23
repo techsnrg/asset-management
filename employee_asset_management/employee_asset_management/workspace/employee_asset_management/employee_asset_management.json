@@ -46,6 +46,12 @@
             "type": "Link"
         },
         {
+            "label": "Employee Sample Issue",
+            "link_to": "Employee Sample Issue",
+            "link_type": "DocType",
+            "type": "Link"
+        },
+        {
             "label": "Employee Asset Register",
             "link_to": "Employee Asset Register",
             "link_type": "Report",
@@ -72,6 +78,12 @@
         {
             "label": "Asset History by Device",
             "link_to": "Asset History by Device",
+            "link_type": "Report",
+            "type": "Link"
+        },
+        {
+            "label": "Employee Sample Register",
+            "link_to": "Employee Sample Register",
             "link_type": "Report",
             "type": "Link"
         }

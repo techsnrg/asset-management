@@ -1,0 +1,117 @@
+{
+    "actions": [],
+    "allow_import": 1,
+    "creation": "2026-04-24 00:30:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "item_code",
+        "item_name",
+        "description",
+        "warehouse",
+        "uom",
+        "qty_issued",
+        "qty_returned",
+        "qty_pending",
+        "rate",
+        "line_value",
+        "outstanding_value",
+        "line_status",
+        "remarks"
+    ],
+    "fields": [
+        {
+            "fieldname": "item_code",
+            "fieldtype": "Link",
+            "label": "Item Code",
+            "options": "Item",
+            "reqd": 1,
+            "read_only": 1
+        },
+        {
+            "fieldname": "item_name",
+            "fieldtype": "Data",
+            "label": "Item Name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "description",
+            "fieldtype": "Small Text",
+            "label": "Description",
+            "read_only": 1
+        },
+        {
+            "fieldname": "warehouse",
+            "fieldtype": "Link",
+            "label": "Warehouse",
+            "options": "Warehouse",
+            "read_only": 1
+        },
+        {
+            "fieldname": "uom",
+            "fieldtype": "Link",
+            "label": "UOM",
+            "options": "UOM",
+            "read_only": 1
+        },
+        {
+            "fieldname": "qty_issued",
+            "fieldtype": "Float",
+            "label": "Qty Issued",
+            "read_only": 1
+        },
+        {
+            "default": "0",
+            "fieldname": "qty_returned",
+            "fieldtype": "Float",
+            "label": "Qty Returned"
+        },
+        {
+            "fieldname": "qty_pending",
+            "fieldtype": "Float",
+            "label": "Qty Pending",
+            "read_only": 1
+        },
+        {
+            "fieldname": "rate",
+            "fieldtype": "Currency",
+            "label": "Rate",
+            "read_only": 1
+        },
+        {
+            "fieldname": "line_value",
+            "fieldtype": "Currency",
+            "label": "Issue Value",
+            "read_only": 1
+        },
+        {
+            "fieldname": "outstanding_value",
+            "fieldtype": "Currency",
+            "label": "Outstanding Value",
+            "read_only": 1
+        },
+        {
+            "fieldname": "line_status",
+            "fieldtype": "Select",
+            "label": "Line Status",
+            "options": "Open\nPartially Returned\nReturned",
+            "read_only": 1
+        },
+        {
+            "fieldname": "remarks",
+            "fieldtype": "Small Text",
+            "label": "Remarks"
+        }
+    ],
+    "istable": 1,
+    "modified": "2026-04-24 00:30:00.000000",
+    "modified_by": "Administrator",
+    "module": "Employee Asset Management",
+    "name": "Employee Sample Issue Item",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}

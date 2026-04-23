@@ -1,0 +1,204 @@
+{
+    "actions": [],
+    "allow_import": 1,
+    "autoname": "format:ESI-.YYYY.-.#####",
+    "creation": "2026-04-24 00:30:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "employee",
+        "delivery_note",
+        "company",
+        "column_break_1",
+        "issue_date",
+        "issued_by",
+        "status",
+        "section_break_totals",
+        "total_qty",
+        "total_returned_qty",
+        "total_outstanding_qty",
+        "column_break_2",
+        "total_issue_value",
+        "total_outstanding_value",
+        "remarks",
+        "section_break_items",
+        "items",
+        "amended_from"
+    ],
+    "fields": [
+        {
+            "fieldname": "employee",
+            "fieldtype": "Link",
+            "label": "Employee",
+            "options": "Employee",
+            "reqd": 1
+        },
+        {
+            "fieldname": "delivery_note",
+            "fieldtype": "Link",
+            "label": "Delivery Note",
+            "options": "Delivery Note",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "company",
+            "fieldtype": "Link",
+            "label": "Company",
+            "options": "Company",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "issue_date",
+            "fieldtype": "Date",
+            "label": "Issue Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "issued_by",
+            "fieldtype": "Link",
+            "label": "Issued By",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "default": "Open",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "Open\nPartially Returned\nClosed",
+            "read_only": 1
+        },
+        {
+            "fieldname": "section_break_totals",
+            "fieldtype": "Section Break",
+            "label": "Summary"
+        },
+        {
+            "fieldname": "total_qty",
+            "fieldtype": "Float",
+            "label": "Total Qty",
+            "read_only": 1
+        },
+        {
+            "fieldname": "total_returned_qty",
+            "fieldtype": "Float",
+            "label": "Total Returned Qty",
+            "read_only": 1
+        },
+        {
+            "fieldname": "total_outstanding_qty",
+            "fieldtype": "Float",
+            "label": "Outstanding Qty",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_issue_value",
+            "fieldtype": "Currency",
+            "label": "Total Issue Value",
+            "read_only": 1
+        },
+        {
+            "fieldname": "total_outstanding_value",
+            "fieldtype": "Currency",
+            "label": "Outstanding Value",
+            "read_only": 1
+        },
+        {
+            "fieldname": "remarks",
+            "fieldtype": "Small Text",
+            "label": "Remarks"
+        },
+        {
+            "fieldname": "section_break_items",
+            "fieldtype": "Section Break",
+            "label": "Sample Items"
+        },
+        {
+            "fieldname": "items",
+            "fieldtype": "Table",
+            "label": "Items",
+            "options": "Employee Sample Issue Item",
+            "reqd": 1
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Employee Sample Issue",
+            "print_hide": 1,
+            "read_only": 1
+        }
+    ],
+    "index_view": 1,
+    "modified": "2026-04-24 00:30:00.000000",
+    "modified_by": "Administrator",
+    "module": "Employee Asset Management",
+    "name": "Employee Sample Issue",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Admin",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "HR User",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "HR Manager",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Employee"
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}

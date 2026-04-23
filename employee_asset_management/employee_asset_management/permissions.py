@@ -82,3 +82,34 @@ def company_asset_has_permission(doc, user=None, permission_type=None):
 
     employee = get_employee_for_user(user)
     return bool(employee and doc.current_holder == employee)
+
+
+def employee_sample_issue_query(user):
+    if has_any_role(user, PRIVILEGED_ROLES):
+        return None
+
+    employee = get_employee_for_user(user)
+    if not employee:
+        return "1=0"
+    return "`tabEmployee Sample Issue`.`employee` = {0}".format(frappe.db.escape(employee))
+
+
+def employee_sample_issue_has_permission(doc, user=None, permission_type=None):
+    user = user or frappe.session.user
+    if has_any_role(user, PRIVILEGED_ROLES):
+        return True
+
+    employee = get_employee_for_user(user)
+    if employee and doc.employee == employee:
+        return True
+
+    if doc.delivery_note:
+        try:
+            delivery_note = frappe.get_doc("Delivery Note", doc.delivery_note)
+        except frappe.DoesNotExistError:
+            delivery_note = None
+
+        if delivery_note and frappe.has_permission("Delivery Note", "read", doc=delivery_note, user=user):
+            return True
+
+    return False
