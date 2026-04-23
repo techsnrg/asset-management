@@ -5,24 +5,42 @@
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
+        "asset_request",
         "employee",
         "company_asset",
-        "asset_request",
         "column_break_4",
         "assigned_date",
         "expected_return_date",
-        "section_break_7",
         "assigned_by",
+        "assignment_status",
+        "section_break_7",
         "condition_at_issue",
+        "issue_notes",
+        "include_charger",
+        "include_bag",
+        "include_mouse",
+        "include_dock",
+        "serial_number_confirmed",
+        "handover_form",
+        "asset_acknowledged_by_employee",
+        "acknowledged_on",
         "amended_from"
     ],
     "fields": [
+        {
+            "fieldname": "asset_request",
+            "fieldtype": "Link",
+            "label": "Asset Request",
+            "options": "Asset Request",
+            "reqd": 1
+        },
         {
             "fieldname": "employee",
             "fieldtype": "Link",
             "label": "Employee",
             "options": "Employee",
-            "reqd": 1
+            "reqd": 1,
+            "read_only": 1
         },
         {
             "fieldname": "company_asset",
@@ -30,12 +48,6 @@
             "label": "Company Asset",
             "options": "Company Asset",
             "reqd": 1
-        },
-        {
-            "fieldname": "asset_request",
-            "fieldtype": "Link",
-            "label": "Asset Request",
-            "options": "Asset Request"
         },
         {
             "fieldname": "column_break_4",
@@ -51,17 +63,28 @@
         {
             "fieldname": "expected_return_date",
             "fieldtype": "Date",
-            "label": "Expected Return Date"
-        },
-        {
-            "fieldname": "section_break_7",
-            "fieldtype": "Section Break"
+            "label": "Expected Return Date",
+            "reqd": 1
         },
         {
             "fieldname": "assigned_by",
             "fieldtype": "Link",
             "label": "Assigned By",
-            "options": "User"
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "default": "Active",
+            "fieldname": "assignment_status",
+            "fieldtype": "Select",
+            "label": "Assignment Status",
+            "options": "Active\nReturned\nCancelled",
+            "read_only": 1
+        },
+        {
+            "fieldname": "section_break_7",
+            "fieldtype": "Section Break",
+            "label": "Handover Details"
         },
         {
             "fieldname": "condition_at_issue",
@@ -69,6 +92,53 @@
             "label": "Condition at Issue",
             "options": "New\nGood\nFair\nPoor",
             "reqd": 1
+        },
+        {
+            "fieldname": "issue_notes",
+            "fieldtype": "Small Text",
+            "label": "Issue Notes"
+        },
+        {
+            "fieldname": "include_charger",
+            "fieldtype": "Check",
+            "label": "Include Charger"
+        },
+        {
+            "fieldname": "include_bag",
+            "fieldtype": "Check",
+            "label": "Include Bag"
+        },
+        {
+            "fieldname": "include_mouse",
+            "fieldtype": "Check",
+            "label": "Include Mouse"
+        },
+        {
+            "fieldname": "include_dock",
+            "fieldtype": "Check",
+            "label": "Include Dock"
+        },
+        {
+            "fieldname": "serial_number_confirmed",
+            "fieldtype": "Check",
+            "label": "Serial Number Confirmed"
+        },
+        {
+            "fieldname": "handover_form",
+            "fieldtype": "Attach",
+            "label": "Handover Form"
+        },
+        {
+            "fieldname": "asset_acknowledged_by_employee",
+            "fieldtype": "Check",
+            "label": "Asset Acknowledged By Employee",
+            "read_only": 1
+        },
+        {
+            "fieldname": "acknowledged_on",
+            "fieldtype": "Datetime",
+            "label": "Acknowledged On",
+            "read_only": 1
         },
         {
             "fieldname": "amended_from",
@@ -82,12 +152,46 @@
     ],
     "index_view": 1,
     "is_submittable": 1,
-    "modified": "2026-03-18 22:58:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Assignment",
     "owner": "Administrator",
     "permissions": [
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Employee"
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "IT Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Admin",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "HR Manager"
+        },
         {
             "create": 1,
             "delete": 1,

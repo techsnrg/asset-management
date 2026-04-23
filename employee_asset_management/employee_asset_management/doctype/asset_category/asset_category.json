@@ -8,7 +8,14 @@
     "field_order": [
         "category_name",
         "requires_approval",
-        "max_per_employee"
+        "auto_approve",
+        "max_per_employee",
+        "section_break_approval",
+        "use_default_approver",
+        "approver_role",
+        "approver_user",
+        "section_break_issuers",
+        "allowed_issuer_roles"
     ],
     "fields": [
         {
@@ -19,10 +26,16 @@
             "unique": 1
         },
         {
-            "default": "0",
+            "default": "1",
             "fieldname": "requires_approval",
             "fieldtype": "Check",
             "label": "Requires Approval"
+        },
+        {
+            "default": "0",
+            "fieldname": "auto_approve",
+            "fieldtype": "Check",
+            "label": "Auto Approve"
         },
         {
             "default": "1",
@@ -30,10 +43,45 @@
             "fieldtype": "Int",
             "label": "Max per Employee",
             "reqd": 1
+        },
+        {
+            "fieldname": "section_break_approval",
+            "fieldtype": "Section Break",
+            "label": "Approval Policy"
+        },
+        {
+            "default": "1",
+            "fieldname": "use_default_approver",
+            "fieldtype": "Check",
+            "label": "Use Default Approver"
+        },
+        {
+            "fieldname": "approver_role",
+            "fieldtype": "Link",
+            "label": "Approver Role",
+            "options": "Role"
+        },
+        {
+            "fieldname": "approver_user",
+            "fieldtype": "Link",
+            "label": "Approver User",
+            "options": "User"
+        },
+        {
+            "fieldname": "section_break_issuers",
+            "fieldtype": "Section Break",
+            "label": "Issuer Roles"
+        },
+        {
+            "fieldname": "allowed_issuer_roles",
+            "fieldtype": "Table",
+            "label": "Allowed Issuer Roles",
+            "options": "Asset Category Issuer Role",
+            "reqd": 1
         }
     ],
     "index_view": 1,
-    "modified": "2026-03-18 22:55:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Category",
@@ -50,6 +98,21 @@
             "role": "System Manager",
             "share": 1,
             "write": 1
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "IT Manager"
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Admin"
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Managing Director"
         }
     ],
     "sort_field": "modified",

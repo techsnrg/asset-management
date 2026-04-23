@@ -9,13 +9,20 @@
         "asset_name",
         "asset_category",
         "serial_number",
+        "brand",
+        "model",
+        "vendor",
         "column_break_4",
         "purchase_date",
         "purchase_value",
+        "warranty_expiry",
+        "location_or_branch",
         "section_break_7",
         "current_status",
         "current_holder",
-        "condition"
+        "condition",
+        "invoice_attachment",
+        "warranty_attachment"
     ],
     "fields": [
         {
@@ -39,6 +46,21 @@
             "unique": 1
         },
         {
+            "fieldname": "brand",
+            "fieldtype": "Data",
+            "label": "Brand"
+        },
+        {
+            "fieldname": "model",
+            "fieldtype": "Data",
+            "label": "Model"
+        },
+        {
+            "fieldname": "vendor",
+            "fieldtype": "Data",
+            "label": "Vendor"
+        },
+        {
             "fieldname": "column_break_4",
             "fieldtype": "Column Break"
         },
@@ -51,6 +73,16 @@
             "fieldname": "purchase_value",
             "fieldtype": "Currency",
             "label": "Purchase Value"
+        },
+        {
+            "fieldname": "warranty_expiry",
+            "fieldtype": "Date",
+            "label": "Warranty Expiry"
+        },
+        {
+            "fieldname": "location_or_branch",
+            "fieldtype": "Data",
+            "label": "Location / Branch"
         },
         {
             "fieldname": "section_break_7",
@@ -75,11 +107,21 @@
             "fieldname": "condition",
             "fieldtype": "Select",
             "label": "Condition",
-            "options": "New\nGood\nFair\nPoor"
+            "options": "New\nGood\nFair\nPoor\nDamaged"
+        },
+        {
+            "fieldname": "invoice_attachment",
+            "fieldtype": "Attach",
+            "label": "Invoice Attachment"
+        },
+        {
+            "fieldname": "warranty_attachment",
+            "fieldtype": "Attach",
+            "label": "Warranty Attachment"
         }
     ],
     "index_view": 1,
-    "modified": "2026-03-18 22:56:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Company Asset",
@@ -96,6 +138,30 @@
             "role": "System Manager",
             "share": 1,
             "write": 1
+        },
+        {
+            "create": 1,
+            "read": 1,
+            "report": 1,
+            "role": "IT Manager",
+            "write": 1
+        },
+        {
+            "create": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Admin",
+            "write": 1
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Employee"
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Managing Director"
         }
     ],
     "sort_field": "modified",

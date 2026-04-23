@@ -2,107 +2,175 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
+from employee_asset_management.employee_asset_management.utils import (
+    count_active_assignments,
+    get_allowed_on_behalf_roles,
+    get_employee_for_user,
+    get_resolved_approver_for_category,
+    has_any_role,
+    send_notification,
+)
+
+
 class AssetRequest(Document):
+    def before_validate(self):
+        if not self.requested_by:
+            self.requested_by = frappe.session.user
+        if not self.status:
+            self.status = "Draft"
+
     def validate(self):
+        self.set_request_type()
+        self.validate_on_behalf_request()
+        self.validate_duplicate_open_request()
         self.check_limits()
-        self.handle_approval_requirement()
+        self.resolve_approver()
 
-    def handle_approval_requirement(self):
-        """If Asset Category doesn't require approval, auto-approve the request"""
-        requires_approval = frappe.db.get_value("Asset Category", self.asset_category, "requires_approval")
-        if not requires_approval and self.status == "Pending":
+    def before_submit(self):
+        category = frappe.get_cached_doc("Asset Category", self.asset_category)
+        if not category.requires_approval or category.auto_approve:
             self.status = "Approved"
-            self.remarks = _("Auto-approved as per category policy.")
+            if not self.approved_by:
+                self.approved_by = self.requested_by
+            if not self.approval_remarks:
+                self.approval_remarks = _("Auto-approved as per category policy.")
+        else:
+            self.status = "Pending Approval"
 
-    def check_limits(self):
-        """Check if employee already has maximum allowed assets for the category"""
-        max_allowed = frappe.db.get_value("Asset Category", self.asset_category, "max_per_employee")
-        if max_allowed:
-            # Count active assignments
-            count = frappe.db.count("Asset Assignment", filters={
-                "employee": self.employee,
-                "docstatus": 1,
-                "company_asset": ["in", frappe.get_all("Company Asset", 
-                    filters={"asset_category": self.asset_category, "current_status": "Assigned"}, 
-                    pluck="name")]
-            })
-            if count >= max_allowed:
-                frappe.throw(_("Employee already has maximum allowed {0}. Limit: {1}").format(self.asset_category, max_allowed))
+    def on_submit(self):
+        if self.status == "Pending Approval":
+            self.notify_approver()
+        elif self.status == "Approved":
+            self.notify_request_outcome()
 
-    def after_insert(self):
-        # Notify Reporting Manager
-        self.notify_reporting_manager()
+    def on_cancel(self):
+        frappe.db.set_value(self.doctype, self.name, "status", "Cancelled", update_modified=False)
 
-    def on_update(self):
-        if self.has_value_changed("status"):
-            if self.status in ["Approved", "Rejected"]:
-                self.notify_employee()
+    def set_request_type(self):
+        requester_employee = get_employee_for_user(self.requested_by)
+        if not self.request_type:
+            self.request_type = "Self" if requester_employee == self.requested_for else "On Behalf"
 
-    def notify_reporting_manager(self):
-        """Notify Expense Approver via Email + System"""
-        expense_approver = frappe.db.get_value("Employee", self.employee, "expense_approver")
-        if not expense_approver:
-            # Fallback to Reporting Manager if expense_approver is not set
-            expense_approver = frappe.db.get_value("Employee", self.employee, "reports_to")
-            
-        if not expense_approver:
+        if self.request_type == "Self" and requester_employee and requester_employee != self.requested_for:
+            frappe.throw(_("Self requests must be created for your own employee record."))
+
+    def validate_on_behalf_request(self):
+        requester_employee = get_employee_for_user(self.requested_by)
+        if requester_employee == self.requested_for:
             return
 
-        # If expense_approver is a User ID (email), use it directly. 
-        # If it's another Employee name, get their user_id.
-        if "@" in expense_approver:
-            manager_email = expense_approver
-        else:
-            manager_email = frappe.db.get_value("Employee", expense_approver, "user_id")
-            
-        if not manager_email:
+        allowed_roles = get_allowed_on_behalf_roles()
+        if not has_any_role(self.requested_by, allowed_roles):
+            frappe.throw(
+                _("Only users with one of these roles can request on behalf of another employee: {0}").format(
+                    ", ".join(allowed_roles)
+                )
+            )
+
+    def validate_duplicate_open_request(self):
+        existing = frappe.db.exists(
+            "Asset Request",
+            {
+                "name": ["!=", self.name],
+                "requested_for": self.requested_for,
+                "asset_category": self.asset_category,
+                "status": ["in", ("Draft", "Pending Approval", "Approved")],
+                "docstatus": ["<", 2],
+            },
+        )
+        if existing:
+            frappe.throw(
+                _("An open request already exists for employee {0} and asset category {1}.").format(
+                    self.requested_for, self.asset_category
+                )
+            )
+
+    def resolve_approver(self):
+        approver = get_resolved_approver_for_category(self.asset_category)
+        self.approver = approver
+
+        category = frappe.get_cached_doc("Asset Category", self.asset_category)
+        if category.requires_approval and not category.auto_approve and not self.approver:
+            frappe.throw(_("No approver could be resolved for asset category {0}.").format(self.asset_category))
+
+    def check_limits(self):
+        max_allowed = frappe.db.get_value("Asset Category", self.asset_category, "max_per_employee")
+        if max_allowed and count_active_assignments(self.requested_for, self.asset_category) >= int(max_allowed):
+            frappe.throw(
+                _("Employee already has the maximum allowed {0}. Limit: {1}").format(
+                    self.asset_category, max_allowed
+                )
+            )
+
+    def notify_approver(self):
+        if not self.approver:
             return
 
         subject = _("New Asset Request: {0}").format(self.name)
-        message = _("Employee {0} has requested a {1}. Please approve.").format(self.employee, self.asset_category)
+        message = _(
+            "User {0} requested {1} for employee {2}. Please review the request."
+        ).format(self.requested_by, self.asset_category, self.requested_for)
+        send_notification([self.approver], subject, message, self.doctype, self.name)
 
-        # Email
-        frappe.sendmail(recipients=manager_email, subject=subject, message=message)
-        
-        # System Notification (Notification Log)
-        frappe.get_doc({
-            "doctype": "Notification Log",
-            "subject": subject,
-            "for_user": manager_email,
-            "type": "Alert",
-            "document_type": self.doctype,
-            "document_name": self.name
-        }).insert(ignore_permissions=True)
-
-    def notify_employee(self):
-        """Notify Employee via Email + System using user_id field"""
-        employee_user_id = frappe.db.get_value("Employee", self.employee, "user_id")
-        if not employee_user_id:
-            return
+    def notify_request_outcome(self):
+        recipients = [self.requested_by]
+        employee_user = frappe.db.get_value("Employee", self.requested_for, "user_id")
+        if employee_user:
+            recipients.append(employee_user)
 
         subject = _("Asset Request {0}: {1}").format(self.status, self.name)
-        message = _("Your request for {0} has been {1}.").format(self.asset_category, self.status)
+        message = _("Request for {0} has been marked as {1}.").format(self.asset_category, self.status)
+        if self.approval_remarks:
+            message += _("<br>Remarks: {0}").format(self.approval_remarks)
 
-        if self.remarks:
-            message += _("<br>Remarks: {0}").format(self.remarks)
+        send_notification(recipients, subject, message, self.doctype, self.name)
 
-        # Email
-        frappe.sendmail(recipients=employee_user_id, subject=subject, message=message)
+    def ensure_can_approve(self, user):
+        if has_any_role(user, {"System Manager"}):
+            return
+        if user != self.approver:
+            frappe.throw(_("Only the resolved approver can review this request."))
 
-        # System Notification
-        frappe.get_doc({
-            "doctype": "Notification Log",
-            "subject": subject,
-            "for_user": employee_user_id,
-            "type": "Alert",
-            "document_type": self.doctype,
-            "document_name": self.name
-        }).insert(ignore_permissions=True)
 
 @frappe.whitelist()
-def approve_request(docname):
+def approve_request(docname, remarks=None):
     doc = frappe.get_doc("Asset Request", docname)
-    doc.status = "Approved"
-    doc.approved_by = frappe.session.user
-    doc.save()
+    doc.ensure_can_approve(frappe.session.user)
+
+    if doc.docstatus != 1 or doc.status != "Pending Approval":
+        frappe.throw(_("Only pending approval requests can be approved."))
+
+    frappe.db.set_value(
+        "Asset Request",
+        docname,
+        {
+            "status": "Approved",
+            "approved_by": frappe.session.user,
+            "approval_remarks": remarks or "",
+        },
+    )
+    doc.reload()
+    doc.notify_request_outcome()
+    return doc
+
+
+@frappe.whitelist()
+def reject_request(docname, remarks=None):
+    doc = frappe.get_doc("Asset Request", docname)
+    doc.ensure_can_approve(frappe.session.user)
+
+    if doc.docstatus != 1 or doc.status != "Pending Approval":
+        frappe.throw(_("Only pending approval requests can be rejected."))
+
+    frappe.db.set_value(
+        "Asset Request",
+        docname,
+        {
+            "status": "Rejected",
+            "approved_by": frappe.session.user,
+            "approval_remarks": remarks or "",
+        },
+    )
+    doc.reload()
+    doc.notify_request_outcome()
     return doc

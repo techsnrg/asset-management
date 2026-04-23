@@ -1,6 +1,6 @@
 {
     "category": "Modules",
-    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\"}}, {\"type\": \"spacer\", \"data\": {}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\"}}]",
+    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\"}}, {\"type\": \"spacer\", \"data\": {}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assigned Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Maintenance Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\"}}]",
     "creation": "2026-03-19 23:20:00.000000",
     "docstatus": 0,
     "doctype": "Workspace",
@@ -10,14 +10,8 @@
     "label": "Employee Asset Management",
     "links": [
         {
-            "label": "Asset Assignment",
-            "link_to": "Asset Assignment",
-            "link_type": "DocType",
-            "type": "Link"
-        },
-        {
-            "label": "Asset Return",
-            "link_to": "Asset Return",
+            "label": "Asset Management Settings",
+            "link_to": "Asset Management Settings",
             "link_type": "DocType",
             "type": "Link"
         },
@@ -40,13 +34,49 @@
             "type": "Link"
         },
         {
+            "label": "Asset Assignment",
+            "link_to": "Asset Assignment",
+            "link_type": "DocType",
+            "type": "Link"
+        },
+        {
+            "label": "Asset Return",
+            "link_to": "Asset Return",
+            "link_type": "DocType",
+            "type": "Link"
+        },
+        {
             "label": "Employee Asset Register",
             "link_to": "Employee Asset Register",
             "link_type": "Report",
             "type": "Link"
+        },
+        {
+            "label": "Active Assignments",
+            "link_to": "Active Assignments",
+            "link_type": "Report",
+            "type": "Link"
+        },
+        {
+            "label": "Overdue Assets",
+            "link_to": "Overdue Assets",
+            "link_type": "Report",
+            "type": "Link"
+        },
+        {
+            "label": "Damaged Returns",
+            "link_to": "Damaged Returns",
+            "link_type": "Report",
+            "type": "Link"
+        },
+        {
+            "label": "Asset History by Device",
+            "link_to": "Asset History by Device",
+            "link_type": "Report",
+            "type": "Link"
         }
     ],
-    "modified": "2026-03-20 01:20:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Employee Asset Management",
@@ -56,6 +86,24 @@
     "roles": [
         {
             "role": "System Manager"
+        },
+        {
+            "role": "Employee"
+        },
+        {
+            "role": "HR User"
+        },
+        {
+            "role": "IT Manager"
+        },
+        {
+            "role": "Admin"
+        },
+        {
+            "role": "HR Manager"
+        },
+        {
+            "role": "Managing Director"
         }
     ]
 }

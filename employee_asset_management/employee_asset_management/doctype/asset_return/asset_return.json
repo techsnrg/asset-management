@@ -13,8 +13,10 @@
         "received_by",
         "section_break_7",
         "condition_at_return",
+        "disposition",
         "penalty_amount",
         "damage_notes",
+        "damage_photo",
         "amended_from"
     ],
     "fields": [
@@ -56,17 +58,27 @@
             "fieldname": "received_by",
             "fieldtype": "Link",
             "label": "Received By",
-            "options": "User"
+            "options": "User",
+            "read_only": 1
         },
         {
             "fieldname": "section_break_7",
-            "fieldtype": "Section Break"
+            "fieldtype": "Section Break",
+            "label": "Return Condition"
         },
         {
             "fieldname": "condition_at_return",
             "fieldtype": "Select",
             "label": "Condition at Return",
             "options": "Good\nFair\nPoor\nDamaged",
+            "reqd": 1
+        },
+        {
+            "default": "Available",
+            "fieldname": "disposition",
+            "fieldtype": "Select",
+            "label": "Disposition",
+            "options": "Available\nMaintenance\nRetired",
             "reqd": 1
         },
         {
@@ -80,6 +92,11 @@
             "label": "Damage Notes"
         },
         {
+            "fieldname": "damage_photo",
+            "fieldtype": "Attach",
+            "label": "Damage Photo"
+        },
+        {
             "fieldname": "amended_from",
             "fieldtype": "Link",
             "label": "Amended From",
@@ -91,12 +108,46 @@
     ],
     "index_view": 1,
     "is_submittable": 1,
-    "modified": "2026-03-18 22:59:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Return",
     "owner": "Administrator",
     "permissions": [
+        {
+            "read": 1,
+            "report": 1,
+            "role": "Employee"
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "IT Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Admin",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "read": 1,
+            "report": 1,
+            "role": "HR Manager"
+        },
         {
             "create": 1,
             "delete": 1,

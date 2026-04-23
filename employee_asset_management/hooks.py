@@ -5,19 +5,39 @@ app_description = "Asset Management System"
 app_email = "admin@example.com"
 app_license = "mit"
 
-# DocEvents
-# Assignment and Return logic is already in their respective controllers.
-# Request logic is in its controller.
+after_install = "employee_asset_management.setup.run_setup"
 
-# Fixtures for sample data
-# These are handled by the consolidated module.
+scheduler_events = {
+    "daily": [
+        "employee_asset_management.employee_asset_management.tasks.send_due_reminders",
+    ]
+}
+
+permission_query_conditions = {
+    "Asset Request": "employee_asset_management.employee_asset_management.permissions.asset_request_query",
+    "Asset Assignment": "employee_asset_management.employee_asset_management.permissions.asset_assignment_query",
+    "Asset Return": "employee_asset_management.employee_asset_management.permissions.asset_return_query",
+    "Company Asset": "employee_asset_management.employee_asset_management.permissions.company_asset_query",
+}
+
+has_permission = {
+    "Asset Request": "employee_asset_management.employee_asset_management.permissions.asset_request_has_permission",
+    "Asset Assignment": "employee_asset_management.employee_asset_management.permissions.asset_assignment_has_permission",
+    "Asset Return": "employee_asset_management.employee_asset_management.permissions.asset_return_has_permission",
+    "Company Asset": "employee_asset_management.employee_asset_management.permissions.company_asset_has_permission",
+}
+
 fixtures = [
+    {"dt": "Asset Management Settings"},
+    {"dt": "Allowed On Behalf Requester Role"},
     {"dt": "Asset Category"},
+    {"dt": "Asset Category Issuer Role"},
     {"dt": "Company Asset"},
     {"dt": "Asset Request"},
     {"dt": "Asset Assignment"},
     {"dt": "Asset Return"},
     {"dt": "Number Card"},
     {"dt": "Dashboard Chart"},
-    {"dt": "Workspace"}
+    {"dt": "Report"},
+    {"dt": "Workspace"},
 ]

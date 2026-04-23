@@ -1,4 +1,4 @@
-frappe.query_reports["Employee Asset Register"] = {
+frappe.query_reports["Overdue Assets"] = {
     filters: [
         {
             fieldname: "employee",
@@ -11,12 +11,6 @@ frappe.query_reports["Employee Asset Register"] = {
             label: __("Asset Category"),
             fieldtype: "Link",
             options: "Asset Category"
-        },
-        {
-            fieldname: "assignment_status",
-            label: __("Assignment Status"),
-            fieldtype: "Select",
-            options: "\nActive\nReturned\nCancelled"
         }
     ]
 };

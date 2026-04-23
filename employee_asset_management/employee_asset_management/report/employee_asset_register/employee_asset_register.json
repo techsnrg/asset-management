@@ -13,26 +13,20 @@
             "options": "Employee"
         },
         {
-            "fieldname": "department",
-            "fieldtype": "Link",
-            "label": "Department",
-            "options": "Department"
-        },
-        {
             "fieldname": "asset_category",
             "fieldtype": "Link",
             "label": "Asset Category",
             "options": "Asset Category"
         },
         {
-            "fieldname": "status",
+            "fieldname": "assignment_status",
             "fieldtype": "Select",
-            "label": "Status",
-            "options": "\nAssigned\nReturned"
+            "label": "Assignment Status",
+            "options": "\nActive\nReturned\nCancelled"
         }
     ],
     "is_standard": "Yes",
-    "modified": "2026-03-18 23:05:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Employee Asset Register",
@@ -44,6 +38,15 @@
     "roles": [
         {
             "role": "HR Manager"
+        },
+        {
+            "role": "IT Manager"
+        },
+        {
+            "role": "Admin"
+        },
+        {
+            "role": "Managing Director"
         },
         {
             "role": "System Manager"

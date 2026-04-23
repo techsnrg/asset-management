@@ -5,23 +5,42 @@
     "doctype": "DocType",
     "engine": "InnoDB",
     "field_order": [
-        "employee",
+        "requested_by",
+        "requested_for",
+        "request_type",
         "asset_category",
         "urgency",
         "column_break_4",
         "status",
+        "approver",
         "approved_by",
         "section_break_7",
         "reason",
-        "remarks",
+        "approval_remarks",
         "amended_from"
     ],
     "fields": [
         {
-            "fieldname": "employee",
+            "fieldname": "requested_by",
             "fieldtype": "Link",
-            "label": "Employee",
+            "label": "Requested By",
+            "options": "User",
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "requested_for",
+            "fieldtype": "Link",
+            "label": "Requested For",
             "options": "Employee",
+            "reqd": 1
+        },
+        {
+            "default": "Self",
+            "fieldname": "request_type",
+            "fieldtype": "Select",
+            "label": "Request Type",
+            "options": "Self\nOn Behalf\nNew Joiner",
             "reqd": 1
         },
         {
@@ -43,11 +62,18 @@
             "fieldtype": "Column Break"
         },
         {
-            "default": "Pending",
+            "default": "Draft",
             "fieldname": "status",
             "fieldtype": "Select",
             "label": "Status",
-            "options": "Pending\nApproved\nRejected\nFulfilled",
+            "options": "Draft\nPending Approval\nApproved\nRejected\nFulfilled\nCancelled",
+            "read_only": 1
+        },
+        {
+            "fieldname": "approver",
+            "fieldtype": "Link",
+            "label": "Approver",
+            "options": "User",
             "read_only": 1
         },
         {
@@ -64,12 +90,13 @@
         {
             "fieldname": "reason",
             "fieldtype": "Small Text",
-            "label": "Reason"
+            "label": "Reason",
+            "reqd": 1
         },
         {
-            "fieldname": "remarks",
+            "fieldname": "approval_remarks",
             "fieldtype": "Small Text",
-            "label": "Remarks"
+            "label": "Approval Remarks"
         },
         {
             "fieldname": "amended_from",
@@ -83,12 +110,68 @@
     ],
     "index_view": 1,
     "is_submittable": 1,
-    "modified": "2026-03-18 22:57:00.000000",
+    "modified": "2026-04-23 23:00:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Request",
     "owner": "Administrator",
     "permissions": [
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Employee",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "HR User",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "HR Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Admin",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Managing Director",
+            "share": 1
+        },
         {
             "create": 1,
             "delete": 1,
