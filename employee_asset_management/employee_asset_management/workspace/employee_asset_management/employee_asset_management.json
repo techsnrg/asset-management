@@ -1,6 +1,6 @@
 {
     "category": "Modules",
-    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\"}}, {\"type\": \"spacer\", \"data\": {}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assigned Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Maintenance Assets\"}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\"}}]",
+    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2, \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3, \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assigned Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Maintenance Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Operations\", \"level\": 3, \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Transactions\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Masters\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
     "creation": "2026-03-19 23:20:00.000000",
     "docstatus": 0,
     "doctype": "Workspace",
@@ -10,85 +10,161 @@
     "label": "Employee Asset Management",
     "links": [
         {
-            "label": "Asset Management Settings",
-            "link_to": "Asset Management Settings",
-            "link_type": "DocType",
-            "type": "Link"
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Transactions",
+            "link_count": 0,
+            "onboard": 0,
+            "type": "Card Break"
         },
         {
-            "label": "Asset Category",
-            "link_to": "Asset Category",
-            "link_type": "DocType",
-            "type": "Link"
-        },
-        {
-            "label": "Company Asset",
-            "link_to": "Company Asset",
-            "link_type": "DocType",
-            "type": "Link"
-        },
-        {
+            "hidden": 0,
+            "is_query_report": 0,
             "label": "Asset Request",
+            "link_count": 0,
             "link_to": "Asset Request",
             "link_type": "DocType",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 0,
             "label": "Asset Assignment",
+            "link_count": 0,
             "link_to": "Asset Assignment",
             "link_type": "DocType",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 0,
             "label": "Asset Return",
+            "link_count": 0,
             "link_to": "Asset Return",
             "link_type": "DocType",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 0,
             "label": "Employee Sample Issue",
+            "link_count": 0,
             "link_to": "Employee Sample Issue",
             "link_type": "DocType",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Masters",
+            "link_count": 0,
+            "onboard": 0,
+            "type": "Card Break"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Asset Management Settings",
+            "link_count": 0,
+            "link_to": "Asset Management Settings",
+            "link_type": "DocType",
+            "onboard": 0,
+            "type": "Link"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Asset Category",
+            "link_count": 0,
+            "link_to": "Asset Category",
+            "link_type": "DocType",
+            "onboard": 0,
+            "type": "Link"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Company Asset",
+            "link_count": 0,
+            "link_to": "Company Asset",
+            "link_type": "DocType",
+            "onboard": 0,
+            "type": "Link"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 0,
+            "label": "Reports",
+            "link_count": 0,
+            "onboard": 0,
+            "type": "Card Break"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Employee Asset Register",
+            "link_count": 0,
             "link_to": "Employee Asset Register",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Active Assignments",
+            "link_count": 0,
             "link_to": "Active Assignments",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Overdue Assets",
+            "link_count": 0,
             "link_to": "Overdue Assets",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Damaged Returns",
+            "link_count": 0,
             "link_to": "Damaged Returns",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Asset History by Device",
+            "link_count": 0,
             "link_to": "Asset History by Device",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         },
         {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Employee Sample Register",
+            "link_count": 0,
             "link_to": "Employee Sample Register",
             "link_type": "Report",
+            "onboard": 0,
             "type": "Link"
         }
     ],
-    "modified": "2026-04-23 23:00:00.000000",
+    "modified": "2026-04-24 09:40:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Employee Asset Management",
