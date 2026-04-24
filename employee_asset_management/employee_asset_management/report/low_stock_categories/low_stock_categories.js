@@ -1,0 +1,16 @@
+frappe.query_reports["Low Stock Categories"] = {
+    filters: [
+        {
+            fieldname: "asset_category",
+            label: __("Asset Category"),
+            fieldtype: "Link",
+            options: "Asset Category"
+        },
+        {
+            fieldname: "show_all_threshold_categories",
+            label: __("Show All Threshold Categories"),
+            fieldtype: "Check",
+            default: 0
+        }
+    ]
+};

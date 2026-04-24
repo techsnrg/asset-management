@@ -1,6 +1,6 @@
 {
     "category": "Modules",
-    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2, \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3, \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assigned Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Maintenance Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Operations\", \"level\": 3, \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Transactions\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Masters\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
+    "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Asset Management Dashboard\", \"level\": 2, \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Assets by Category\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Key Metrics\", \"level\": 3, \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Available Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assigned Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Maintenance Assets\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Requests\", \"col\": 4}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Overdue Assignments\", \"col\": 4}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Sample Issues\", \"col\": 4}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"Operations\", \"level\": 3, \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Transactions\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Masters\", \"col\": 4}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Reports\", \"col\": 4}}]",
     "creation": "2026-03-19 23:20:00.000000",
     "docstatus": 0,
     "doctype": "Workspace",
@@ -156,6 +156,16 @@
         {
             "hidden": 0,
             "is_query_report": 1,
+            "label": "Low Stock Categories",
+            "link_count": 0,
+            "link_to": "Low Stock Categories",
+            "link_type": "Report",
+            "onboard": 0,
+            "type": "Link"
+        },
+        {
+            "hidden": 0,
+            "is_query_report": 1,
             "label": "Employee Sample Register",
             "link_count": 0,
             "link_to": "Employee Sample Register",
@@ -164,7 +174,7 @@
             "type": "Link"
         }
     ],
-    "modified": "2026-04-24 09:40:00.000000",
+    "modified": "2026-04-25 10:30:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Employee Asset Management",

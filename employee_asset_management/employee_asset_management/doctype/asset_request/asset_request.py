@@ -20,6 +20,8 @@ class AssetRequest(Document):
             self.status = "Draft"
 
     def validate(self):
+        self.validate_requested_for()
+        self.set_department()
         self.set_request_type()
         self.validate_on_behalf_request()
         self.validate_duplicate_open_request()
@@ -48,7 +50,7 @@ class AssetRequest(Document):
 
     def set_request_type(self):
         requester_employee = get_employee_for_user(self.requested_by)
-        if not self.request_type:
+        if self.request_type != "New Joiner":
             self.request_type = "Self" if requester_employee == self.requested_for else "On Behalf"
 
         if self.request_type == "Self" and requester_employee and requester_employee != self.requested_for:
@@ -66,6 +68,15 @@ class AssetRequest(Document):
                     ", ".join(allowed_roles)
                 )
             )
+
+    def validate_requested_for(self):
+        employee_status = frappe.db.get_value("Employee", self.requested_for, "status")
+        if employee_status and employee_status != "Active":
+            frappe.throw(_("Asset requests can only be created for active employees."))
+
+    def set_department(self):
+        employee_department = frappe.db.get_value("Employee", self.requested_for, "department")
+        self.department = employee_department or None
 
     def validate_duplicate_open_request(self):
         existing = frappe.db.exists(
@@ -86,7 +97,12 @@ class AssetRequest(Document):
             )
 
     def resolve_approver(self):
-        approver = get_resolved_approver_for_category(self.asset_category)
+        approver = get_resolved_approver_for_category(
+            self.asset_category,
+            department=self.department,
+            urgency=self.urgency,
+            estimated_value=self.estimated_value,
+        )
         self.approver = approver
 
         category = frappe.get_cached_doc("Asset Category", self.asset_category)
@@ -107,9 +123,14 @@ class AssetRequest(Document):
             return
 
         subject = _("New Asset Request: {0}").format(self.name)
-        message = _(
-            "User {0} requested {1} for employee {2}. Please review the request."
-        ).format(self.requested_by, self.asset_category, self.requested_for)
+        message = _("User {0} requested {1} for employee {2}.").format(
+            self.requested_by, self.asset_category, self.requested_for
+        )
+        if self.department:
+            message += _(" Department: {0}.").format(self.department)
+        if self.estimated_value:
+            message += _(" Estimated value: {0}.").format(self.estimated_value)
+        message += _(" Please review the request.")
         send_notification([self.approver], subject, message, self.doctype, self.name)
 
     def notify_request_outcome(self):

@@ -1,0 +1,62 @@
+{
+    "actions": [],
+    "allow_import": 1,
+    "creation": "2026-04-25 10:30:00.000000",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "department",
+        "urgency",
+        "minimum_value",
+        "maximum_value",
+        "approver_role",
+        "approver_user"
+    ],
+    "fields": [
+        {
+            "fieldname": "department",
+            "fieldtype": "Link",
+            "label": "Department",
+            "options": "Department"
+        },
+        {
+            "fieldname": "urgency",
+            "fieldtype": "Select",
+            "label": "Urgency",
+            "options": "\nLow\nMedium\nHigh"
+        },
+        {
+            "fieldname": "minimum_value",
+            "fieldtype": "Currency",
+            "label": "Minimum Value"
+        },
+        {
+            "fieldname": "maximum_value",
+            "fieldtype": "Currency",
+            "label": "Maximum Value"
+        },
+        {
+            "fieldname": "approver_role",
+            "fieldtype": "Link",
+            "label": "Approver Role",
+            "options": "Role"
+        },
+        {
+            "fieldname": "approver_user",
+            "fieldtype": "Link",
+            "label": "Approver User",
+            "options": "User"
+        }
+    ],
+    "istable": 1,
+    "modified": "2026-04-25 10:30:00.000000",
+    "modified_by": "Administrator",
+    "module": "Employee Asset Management",
+    "name": "Asset Category Approval Rule",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}

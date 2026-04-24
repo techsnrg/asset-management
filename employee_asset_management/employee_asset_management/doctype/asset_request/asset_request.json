@@ -8,8 +8,10 @@
         "requested_by",
         "requested_for",
         "request_type",
+        "department",
         "asset_category",
         "urgency",
+        "estimated_value",
         "column_break_4",
         "status",
         "approver",
@@ -44,6 +46,12 @@
             "reqd": 1
         },
         {
+            "fieldname": "department",
+            "fieldtype": "Link",
+            "label": "Department",
+            "options": "Department"
+        },
+        {
             "fieldname": "asset_category",
             "fieldtype": "Link",
             "label": "Asset Category",
@@ -56,6 +64,11 @@
             "fieldtype": "Select",
             "label": "Urgency",
             "options": "Low\nMedium\nHigh"
+        },
+        {
+            "fieldname": "estimated_value",
+            "fieldtype": "Currency",
+            "label": "Estimated Value"
         },
         {
             "fieldname": "column_break_4",
@@ -110,7 +123,7 @@
     ],
     "index_view": 1,
     "is_submittable": 1,
-    "modified": "2026-04-23 23:00:00.000000",
+    "modified": "2026-04-25 10:30:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Request",

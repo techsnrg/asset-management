@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+from frappe.utils import flt
 
 
 DEFAULT_ON_BEHALF_ROLES = ("HR User", "HR Manager", "Admin", "System Manager")
@@ -112,11 +113,53 @@ def get_category_issuer_roles(category_name):
     return [row.role for row in category.allowed_issuer_roles if row.role]
 
 
-def get_resolved_approver_for_category(category_name):
+def get_matching_approval_rule(category, department=None, urgency=None, estimated_value=0):
+    estimated_value = flt(estimated_value)
+
+    for row in category.approval_matrix_rules or []:
+        if row.department and row.department != department:
+            continue
+        if row.urgency and row.urgency != urgency:
+            continue
+
+        minimum_value = flt(row.minimum_value)
+        maximum_value = flt(row.maximum_value)
+
+        if minimum_value and estimated_value < minimum_value:
+            continue
+        if maximum_value and estimated_value > maximum_value:
+            continue
+        if row.approver_user or row.approver_role:
+            return row
+
+    return None
+
+
+def resolve_approver_from_rule(rule):
+    if not rule:
+        return None
+    if rule.approver_user:
+        return rule.approver_user
+    if rule.approver_role:
+        return get_first_enabled_user_for_role(rule.approver_role)
+    return None
+
+
+def get_resolved_approver_for_category(category_name, department=None, urgency=None, estimated_value=0):
     category = get_category_doc(category_name)
 
     if not category.requires_approval or category.auto_approve:
         return None
+
+    matrix_rule = get_matching_approval_rule(
+        category,
+        department=department,
+        urgency=urgency,
+        estimated_value=estimated_value,
+    )
+    approver = resolve_approver_from_rule(matrix_rule)
+    if approver:
+        return approver
 
     if not category.use_default_approver:
         if category.approver_user:

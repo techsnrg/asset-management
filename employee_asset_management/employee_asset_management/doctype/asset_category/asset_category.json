@@ -10,10 +10,13 @@
         "requires_approval",
         "auto_approve",
         "max_per_employee",
+        "low_stock_threshold",
         "section_break_approval",
         "use_default_approver",
         "approver_role",
         "approver_user",
+        "section_break_approval_rules",
+        "approval_matrix_rules",
         "section_break_issuers",
         "allowed_issuer_roles"
     ],
@@ -45,6 +48,12 @@
             "reqd": 1
         },
         {
+            "default": "0",
+            "fieldname": "low_stock_threshold",
+            "fieldtype": "Int",
+            "label": "Low Stock Threshold"
+        },
+        {
             "fieldname": "section_break_approval",
             "fieldtype": "Section Break",
             "label": "Approval Policy"
@@ -68,6 +77,17 @@
             "options": "User"
         },
         {
+            "fieldname": "section_break_approval_rules",
+            "fieldtype": "Section Break",
+            "label": "Approval Matrix"
+        },
+        {
+            "fieldname": "approval_matrix_rules",
+            "fieldtype": "Table",
+            "label": "Approval Matrix Rules",
+            "options": "Asset Category Approval Rule"
+        },
+        {
             "fieldname": "section_break_issuers",
             "fieldtype": "Section Break",
             "label": "Issuer Roles"
@@ -81,7 +101,7 @@
         }
     ],
     "index_view": 1,
-    "modified": "2026-04-23 23:00:00.000000",
+    "modified": "2026-04-25 10:30:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
     "name": "Asset Category",
