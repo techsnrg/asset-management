@@ -56,7 +56,7 @@ class AssetAssignment(Document):
 
     def check_category_limit(self):
         category = frappe.db.get_value("Company Asset", self.company_asset, "asset_category")
-        max_allowed = frappe.db.get_value("Asset Category", category, "max_per_employee")
+        max_allowed = frappe.db.get_value("Employee Asset Category", category, "max_per_employee")
         if max_allowed and count_active_assignments(self.employee, category, exclude_assignment=self.name) >= int(
             max_allowed
         ):

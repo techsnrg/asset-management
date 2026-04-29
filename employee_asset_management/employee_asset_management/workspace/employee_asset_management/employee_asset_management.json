@@ -78,9 +78,9 @@
         {
             "hidden": 0,
             "is_query_report": 0,
-            "label": "Asset Category",
+            "label": "Employee Asset Category",
             "link_count": 0,
-            "link_to": "Asset Category",
+            "link_to": "Employee Asset Category",
             "link_type": "DocType",
             "onboard": 0,
             "type": "Link"

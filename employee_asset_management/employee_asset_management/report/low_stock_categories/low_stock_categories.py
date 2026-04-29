@@ -11,10 +11,10 @@ def execute(filters=None):
 def get_columns():
     return [
         {
-            "label": _("Asset Category"),
+            "label": _("Employee Asset Category"),
             "fieldname": "asset_category",
             "fieldtype": "Link",
-            "options": "Asset Category",
+            "options": "Employee Asset Category",
             "width": 180,
         },
         {"label": _("Low Stock Threshold"), "fieldname": "low_stock_threshold", "fieldtype": "Int", "width": 130},
@@ -43,7 +43,7 @@ def get_data(filters):
             COALESCE(SUM(CASE WHEN ca.current_status = 'Assigned' THEN 1 ELSE 0 END), 0) AS assigned_assets,
             COALESCE(SUM(CASE WHEN ca.current_status = 'Maintenance' THEN 1 ELSE 0 END), 0) AS maintenance_assets,
             COUNT(ca.name) AS total_assets
-        FROM `tabAsset Category` ac
+        FROM `tabEmployee Asset Category` ac
         LEFT JOIN `tabCompany Asset` ca ON ca.asset_category = ac.name
         WHERE {' AND '.join(conditions)}
         GROUP BY ac.name, ac.low_stock_threshold

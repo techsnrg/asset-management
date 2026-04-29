@@ -11,7 +11,7 @@ def get_columns():
     return [
         {"label": _("Employee"), "fieldname": "employee_name", "fieldtype": "Data", "width": 160},
         {"label": _("Requested By"), "fieldname": "requested_by", "fieldtype": "Link", "options": "User", "width": 140},
-        {"label": _("Asset Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Asset Category", "width": 130},
+        {"label": _("Employee Asset Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Employee Asset Category", "width": 160},
         {"label": _("Asset Name"), "fieldname": "asset_name", "fieldtype": "Link", "options": "Company Asset", "width": 180},
         {"label": _("Serial Number"), "fieldname": "serial_number", "fieldtype": "Data", "width": 130},
         {"label": _("Assigned Date"), "fieldname": "assigned_date", "fieldtype": "Date", "width": 110},

@@ -78,8 +78,8 @@ def insert_sample_data():
     ]
 
     for category in categories:
-        if not frappe.db.exists("Asset Category", category["category_name"]):
-            frappe.get_doc({"doctype": "Asset Category", **category}).insert(ignore_permissions=True)
+        if not frappe.db.exists("Employee Asset Category", category["category_name"]):
+            frappe.get_doc({"doctype": "Employee Asset Category", **category}).insert(ignore_permissions=True)
 
     assets = [
         {

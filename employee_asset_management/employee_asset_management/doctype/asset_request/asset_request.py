@@ -29,7 +29,7 @@ class AssetRequest(Document):
         self.resolve_approver()
 
     def before_submit(self):
-        category = frappe.get_cached_doc("Asset Category", self.asset_category)
+        category = frappe.get_cached_doc("Employee Asset Category", self.asset_category)
         if not category.requires_approval or category.auto_approve:
             self.status = "Approved"
             if not self.approved_by:
@@ -105,12 +105,12 @@ class AssetRequest(Document):
         )
         self.approver = approver
 
-        category = frappe.get_cached_doc("Asset Category", self.asset_category)
+        category = frappe.get_cached_doc("Employee Asset Category", self.asset_category)
         if category.requires_approval and not category.auto_approve and not self.approver:
             frappe.throw(_("No approver could be resolved for asset category {0}.").format(self.asset_category))
 
     def check_limits(self):
-        max_allowed = frappe.db.get_value("Asset Category", self.asset_category, "max_per_employee")
+        max_allowed = frappe.db.get_value("Employee Asset Category", self.asset_category, "max_per_employee")
         if max_allowed and count_active_assignments(self.requested_for, self.asset_category) >= int(max_allowed):
             frappe.throw(
                 _("Employee already has the maximum allowed {0}. Limit: {1}").format(

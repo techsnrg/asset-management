@@ -2,9 +2,9 @@ frappe.query_reports["Low Stock Categories"] = {
     filters: [
         {
             fieldname: "asset_category",
-            label: __("Asset Category"),
+            label: __("Employee Asset Category"),
             fieldtype: "Link",
-            options: "Asset Category"
+            options: "Employee Asset Category"
         },
         {
             fieldname: "show_all_threshold_categories",

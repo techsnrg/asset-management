@@ -104,7 +104,7 @@
     "modified": "2026-04-25 10:30:00.000000",
     "modified_by": "Administrator",
     "module": "Employee Asset Management",
-    "name": "Asset Category",
+    "name": "Employee Asset Category",
     "owner": "Administrator",
     "permissions": [
         {

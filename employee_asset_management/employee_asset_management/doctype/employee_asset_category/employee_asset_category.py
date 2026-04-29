@@ -3,7 +3,7 @@ from frappe import _
 from frappe.model.document import Document
 
 
-class AssetCategory(Document):
+class EmployeeAssetCategory(Document):
     def validate(self):
         if self.low_stock_threshold and int(self.low_stock_threshold) < 0:
             frappe.throw(_("Low stock threshold cannot be negative."))

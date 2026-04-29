@@ -36,7 +36,7 @@ has_permission = {
 fixtures = [
     {"dt": "Asset Management Settings"},
     {"dt": "Allowed On Behalf Requester Role"},
-    {"dt": "Asset Category"},
+    {"dt": "Employee Asset Category"},
     {"dt": "Asset Category Issuer Role"},
     {"dt": "Company Asset"},
     {"dt": "Asset Request"},

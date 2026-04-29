@@ -2,7 +2,7 @@ import frappe
 import json
 
 def check():
-    doctypes = ["Asset Category", "Company Asset", "Asset Request", "Asset Assignment", "Asset Return"]
+    doctypes = ["Employee Asset Category", "Company Asset", "Asset Request", "Asset Assignment", "Asset Return"]
     results = {}
     for dt in doctypes:
         try:

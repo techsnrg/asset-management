@@ -12,7 +12,7 @@ def get_columns():
         {"label": _("Return"), "fieldname": "name", "fieldtype": "Link", "options": "Asset Return", "width": 130},
         {"label": _("Employee"), "fieldname": "employee", "fieldtype": "Link", "options": "Employee", "width": 140},
         {"label": _("Asset"), "fieldname": "company_asset", "fieldtype": "Link", "options": "Company Asset", "width": 180},
-        {"label": _("Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Asset Category", "width": 130},
+        {"label": _("Employee Asset Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Employee Asset Category", "width": 160},
         {"label": _("Return Date"), "fieldname": "return_date", "fieldtype": "Date", "width": 110},
         {"label": _("Disposition"), "fieldname": "disposition", "fieldtype": "Data", "width": 110},
         {"label": _("Penalty"), "fieldname": "penalty_amount", "fieldtype": "Currency", "width": 110}

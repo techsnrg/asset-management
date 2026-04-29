@@ -105,7 +105,7 @@ def get_first_enabled_user_for_role(role_name):
 
 
 def get_category_doc(category_name):
-    return frappe.get_cached_doc("Asset Category", category_name)
+    return frappe.get_cached_doc("Employee Asset Category", category_name)
 
 
 def get_category_issuer_roles(category_name):

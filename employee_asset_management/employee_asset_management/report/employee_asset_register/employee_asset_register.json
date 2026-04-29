@@ -15,8 +15,8 @@
         {
             "fieldname": "asset_category",
             "fieldtype": "Link",
-            "label": "Asset Category",
-            "options": "Asset Category"
+            "label": "Employee Asset Category",
+            "options": "Employee Asset Category"
         },
         {
             "fieldname": "assignment_status",

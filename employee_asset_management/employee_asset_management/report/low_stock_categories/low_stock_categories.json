@@ -13,7 +13,7 @@
     "name": "Low Stock Categories",
     "owner": "Administrator",
     "prepared_report": 0,
-    "ref_doctype": "Asset Category",
+    "ref_doctype": "Employee Asset Category",
     "report_name": "Low Stock Categories",
     "report_type": "Script Report",
     "roles": [

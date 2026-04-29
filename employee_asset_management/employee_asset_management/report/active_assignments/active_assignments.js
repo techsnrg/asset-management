@@ -8,9 +8,9 @@ frappe.query_reports["Active Assignments"] = {
         },
         {
             fieldname: "asset_category",
-            label: __("Asset Category"),
+            label: __("Employee Asset Category"),
             fieldtype: "Link",
-            options: "Asset Category"
+            options: "Employee Asset Category"
         }
     ]
 };

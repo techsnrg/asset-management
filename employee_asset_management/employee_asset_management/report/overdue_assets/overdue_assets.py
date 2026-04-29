@@ -11,7 +11,7 @@ def get_columns():
     return [
         {"label": _("Employee"), "fieldname": "employee", "fieldtype": "Link", "options": "Employee", "width": 140},
         {"label": _("Asset"), "fieldname": "company_asset", "fieldtype": "Link", "options": "Company Asset", "width": 180},
-        {"label": _("Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Asset Category", "width": 130},
+        {"label": _("Employee Asset Category"), "fieldname": "asset_category", "fieldtype": "Link", "options": "Employee Asset Category", "width": 160},
         {"label": _("Expected Return"), "fieldname": "expected_return_date", "fieldtype": "Date", "width": 120},
         {"label": _("Overdue Days"), "fieldname": "overdue_days", "fieldtype": "Int", "width": 110}
     ]
