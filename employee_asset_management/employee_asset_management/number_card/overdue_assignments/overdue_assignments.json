@@ -5,6 +5,7 @@
     "document_type": "Asset Assignment",
     "filters_config": "[[\"Asset Assignment\",\"assignment_status\",\"=\",\"Active\"],[\"Asset Assignment\",\"docstatus\",\"=\",\"1\"],[\"Asset Assignment\",\"expected_return_date\",\"<\",\"Today\"]]",
     "function": "Count",
+    "is_public": 1,
     "is_standard": 1,
     "label": "Overdue Assignments",
     "modified": "2026-04-25 10:30:00.000000",

@@ -71,39 +71,13 @@ class EmployeeSampleIssue(Document):
             self.status = "Open"
 
 
-@frappe.whitelist()
-def create_sample_issue_from_delivery_note(delivery_note_name):
-    delivery_note = frappe.get_doc("Delivery Note", delivery_note_name)
-
-    if not frappe.has_permission("Delivery Note", "read", doc=delivery_note):
-        frappe.throw(_("You do not have permission to access this Delivery Note."))
-    if delivery_note.docstatus != 1:
-        frappe.throw(_("Sample Issue can only be created from a submitted Delivery Note."))
-    if getattr(delivery_note, "is_return", 0):
-        frappe.throw(_("Sample Issue cannot be created from a return Delivery Note."))
-
-    employee = getattr(delivery_note, "custom_employee_name", None)
-    if not employee:
-        frappe.throw(_("Please fill Employee Name on the Delivery Note before creating a Sample Issue."))
-
-    existing = frappe.db.get_value(
-        "Employee Sample Issue",
-        {"delivery_note": delivery_note.name, "docstatus": ["<", 2]},
-        "name",
-    )
-    if existing:
-        return {"name": existing, "created": False}
-
-    issue = frappe.get_doc(
-        {
-            "doctype": "Employee Sample Issue",
-            "employee": employee,
-            "delivery_note": delivery_note.name,
-            "company": delivery_note.company,
-            "issue_date": delivery_note.posting_date,
-            "issued_by": frappe.session.user,
-        }
-    )
+def build_sample_issue_payload(delivery_note):
+    payload = {
+        "employee": getattr(delivery_note, "custom_employee_name", None),
+        "company": delivery_note.company,
+        "issue_date": delivery_note.posting_date,
+        "items": [],
+    }
 
     for item in delivery_note.items:
         qty = flt(item.qty)
@@ -111,8 +85,7 @@ def create_sample_issue_from_delivery_note(delivery_note_name):
             continue
 
         line_value = flt(item.amount) or qty * flt(item.rate)
-        issue.append(
-            "items",
+        payload["items"].append(
             {
                 "item_code": item.item_code,
                 "item_name": item.item_name,
@@ -124,8 +97,65 @@ def create_sample_issue_from_delivery_note(delivery_note_name):
                 "rate": flt(item.rate),
                 "line_value": line_value,
                 "remarks": "",
-            },
+            }
         )
+
+    return payload
+
+
+def validate_delivery_note_for_sample_issue(delivery_note):
+    if not frappe.has_permission("Delivery Note", "read", doc=delivery_note):
+        frappe.throw(_("You do not have permission to access this Delivery Note."))
+    if delivery_note.docstatus != 1:
+        frappe.throw(_("Sample Issue can only be created from a submitted Delivery Note."))
+    if getattr(delivery_note, "is_return", 0):
+        frappe.throw(_("Sample Issue cannot be created from a return Delivery Note."))
+    if not getattr(delivery_note, "custom_employee_name", None):
+        frappe.throw(_("Please fill Employee Name on the Delivery Note before creating a Sample Issue."))
+
+
+def get_existing_sample_issue(delivery_note_name):
+    return frappe.db.get_value(
+        "Employee Sample Issue",
+        {"delivery_note": delivery_note_name, "docstatus": ["<", 2]},
+        "name",
+    )
+
+
+@frappe.whitelist()
+def get_sample_issue_data_from_delivery_note(delivery_note_name):
+    delivery_note = frappe.get_doc("Delivery Note", delivery_note_name)
+    validate_delivery_note_for_sample_issue(delivery_note)
+
+    existing = get_existing_sample_issue(delivery_note.name)
+    payload = build_sample_issue_payload(delivery_note)
+    payload["existing_issue"] = existing
+    return payload
+
+
+@frappe.whitelist()
+def create_sample_issue_from_delivery_note(delivery_note_name):
+    delivery_note = frappe.get_doc("Delivery Note", delivery_note_name)
+    validate_delivery_note_for_sample_issue(delivery_note)
+
+    existing = get_existing_sample_issue(delivery_note.name)
+    if existing:
+        return {"name": existing, "created": False}
+
+    payload = build_sample_issue_payload(delivery_note)
+    issue = frappe.get_doc(
+        {
+            "doctype": "Employee Sample Issue",
+            "employee": payload["employee"],
+            "delivery_note": delivery_note.name,
+            "company": payload["company"],
+            "issue_date": payload["issue_date"],
+            "issued_by": frappe.session.user,
+        }
+    )
+
+    for item in payload["items"]:
+        issue.append("items", item)
 
     if not issue.items:
         frappe.throw(_("Delivery Note does not contain any issueable items."))

@@ -5,6 +5,7 @@
     "document_type": "Company Asset",
     "filters_config": "[[\"Company Asset\",\"current_status\",\"=\",\"Assigned\"]]",
     "function": "Count",
+    "is_public": 1,
     "is_standard": 1,
     "label": "Assigned Assets",
     "modified": "2026-04-23 23:00:00.000000",

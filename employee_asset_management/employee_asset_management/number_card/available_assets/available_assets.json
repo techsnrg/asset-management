@@ -5,6 +5,7 @@
     "document_type": "Company Asset",
     "filters_config": "[[\"Company Asset\",\"current_status\",\"=\",\"Available\"]]",
     "function": "Count",
+    "is_public": 1,
     "is_standard": 1,
     "label": "Available Assets",
     "modified": "2026-03-19 23:30:00.000000",
