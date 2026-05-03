@@ -11,6 +11,16 @@ frappe.ui.form.on("Asset Request", {
         if (frm.is_new() && !frm.doc.requested_by) {
             frm.set_value("requested_by", frappe.session.user);
         }
+
+        if (frm.is_new() && frm.doc.request_type === "Self" && !frm.doc.requested_for) {
+            set_self_requested_for(frm);
+        }
+    },
+
+    request_type(frm) {
+        if (frm.doc.request_type === "Self") {
+            set_self_requested_for(frm);
+        }
     },
 
     requested_for(frm) {
@@ -37,6 +47,24 @@ frappe.ui.form.on("Asset Request", {
         }
     }
 });
+
+function set_self_requested_for(frm) {
+    frappe.db.get_value(
+        "Employee",
+        {
+            user_id: frappe.session.user,
+            status: "Active"
+        },
+        ["name", "department"]
+    ).then(({ message }) => {
+        if (!message || !message.name) {
+            return;
+        }
+
+        frm.set_value("requested_for", message.name);
+        frm.set_value("department", message.department || "");
+    });
+}
 
 function review_request(frm, method, title) {
     frappe.prompt(

@@ -6,8 +6,8 @@
     "engine": "InnoDB",
     "field_order": [
         "requested_by",
-        "requested_for",
         "request_type",
+        "requested_for",
         "department",
         "asset_category",
         "urgency",
