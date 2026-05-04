@@ -1,7 +1,7 @@
 {
     "actions": [],
     "allow_import": 1,
-    "autoname": "format:ESI-.YYYY.-.#####",
+    "autoname": "ESI-.YYYY.-.#####",
     "creation": "2026-04-24 00:30:00.000000",
     "doctype": "DocType",
     "engine": "InnoDB",

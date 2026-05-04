@@ -1,6 +1,7 @@
 {
     "actions": [],
     "allow_import": 1,
+    "autoname": "ASN-.YYYY.-.#####",
     "creation": "2026-03-18 22:58:00.000000",
     "doctype": "DocType",
     "engine": "InnoDB",

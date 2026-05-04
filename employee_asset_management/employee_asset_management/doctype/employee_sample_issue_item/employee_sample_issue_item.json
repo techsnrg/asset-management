@@ -22,16 +22,20 @@
     ],
     "fields": [
         {
+            "columns": 2,
             "fieldname": "item_code",
             "fieldtype": "Link",
+            "in_list_view": 1,
             "label": "Item Code",
             "options": "Item",
             "reqd": 1,
             "read_only": 1
         },
         {
+            "columns": 2,
             "fieldname": "item_name",
             "fieldtype": "Data",
+            "in_list_view": 1,
             "label": "Item Name",
             "read_only": 1
         },
@@ -49,39 +53,51 @@
             "read_only": 1
         },
         {
+            "columns": 1,
             "fieldname": "uom",
             "fieldtype": "Link",
+            "in_list_view": 1,
             "label": "UOM",
             "options": "UOM",
             "read_only": 1
         },
         {
+            "columns": 1,
             "fieldname": "qty_issued",
             "fieldtype": "Float",
+            "in_list_view": 1,
             "label": "Qty Issued",
             "read_only": 1
         },
         {
+            "columns": 1,
             "default": "0",
             "fieldname": "qty_returned",
             "fieldtype": "Float",
+            "in_list_view": 1,
             "label": "Qty Returned"
         },
         {
+            "columns": 1,
             "fieldname": "qty_pending",
             "fieldtype": "Float",
+            "in_list_view": 1,
             "label": "Qty Pending",
             "read_only": 1
         },
         {
+            "columns": 1,
             "fieldname": "rate",
             "fieldtype": "Currency",
+            "in_list_view": 1,
             "label": "Rate",
             "read_only": 1
         },
         {
+            "columns": 1,
             "fieldname": "line_value",
             "fieldtype": "Currency",
+            "in_list_view": 1,
             "label": "Issue Value",
             "read_only": 1
         },
